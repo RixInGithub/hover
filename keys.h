@@ -1,5 +1,5 @@
 #ifdef _WIN32
 #define CTRLC 3
 #else
-#define CTRLC -1
+#define CTRLC 0
 #endif
