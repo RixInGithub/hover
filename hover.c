@@ -86,7 +86,7 @@ char zeroEchoGetchar() {
 		struct termios _oldt, _newt;
 		tcgetattr(0,&_oldt);
 		_newt = _oldt;
-		_newt.c_lflag &= ~(ECHO|ISIG);
+		_newt.c_lflag &= ~ECHO;
 		tcsetattr(0,TCSANOW,&_newt);
 		res = getchar();
 		tcsetattr(0,TCSANOW,&_oldt);
