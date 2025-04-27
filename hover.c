@@ -96,7 +96,9 @@ char zeroEchoGetchar() {
 // cross-compatability
 
 // all platforms funcs/vars
-char** fileTxt;
+char*file;
+char**fileTxt;
+int fileLines;
 
 char* getFileName(int argc, char*argv[]) {
 	if(argc<2)return"[untitled]";
@@ -137,7 +139,7 @@ char* repeat(char* str, int n) {
 
 char* chr2str(char c) { // also works with ints!
 	char*out=malloc(2); // sizeof(char) * 2?
-	snprintf(out, strlen(out), "%c", c);
+	out[0]=c; // i have no idea why i placed snprintf here instead of the current thing
 	return(out);
 }
 
@@ -180,14 +182,14 @@ char** getFileLines(char*f, int*oLen) { // supports \r, \r\n, \n
 
 // main functionality
 void printTxt() {
-	
+	fileTxt = getFileLines(file,&fileLines);
 }
 
 int main(int argc, char*argv[]) {
 	onWindowsStart();
 	bool run = true;
 	bool ok = true;
-	char*file = getFileName(argc,argv);
+	file = getFileName(argc,argv);
 	int*size;
 	char*spaces;
 	char inp;
