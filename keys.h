@@ -1,0 +1,3 @@
+#ifdef _WIN32
+#define CTRLC 3
+#endif
