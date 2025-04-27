@@ -86,7 +86,7 @@ char zeroEchoGetchar() {
 		struct termios _oldt, _newt;
 		tcgetattr(0,&_oldt);
 		_newt = _oldt;
-		_newt.c_lflag &= ~ECHO;
+		_newt.c_lflag &= ~(ECHO|ISIG);
 		tcsetattr(0,TCSANOW,&_newt);
 		res = getchar();
 		tcsetattr(0,TCSANOW,&_oldt);
@@ -183,7 +183,7 @@ void printTxt() {
 	
 }
 
-bool main(int argc, char*argv[]) {
+int main(int argc, char*argv[]) {
 	onWindowsStart();
 	bool run = true;
 	bool ok = true;
@@ -196,7 +196,7 @@ bool main(int argc, char*argv[]) {
 		size = getTermSize();
 		spaces = repeat("\x20",size[0]-strlen(file));
 		printf("\x1b[7m");
-		printf(file);
+		printf("%s",file);
 		printf("%s",spaces);
 		printf("\x1b[0m\n");
 		free(spaces);
