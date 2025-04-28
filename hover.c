@@ -64,7 +64,7 @@ void curVis(bool show) {
 		curInf.bVisible = show;
 		SetConsoleCursorInfo(hConsole, &curInf);
 	#else
-		printf("\x1b[?25%c",104+(show*4)); // if show is false, it will be h, else l
+		printf("\x1b[?25%c",104+(!(show)*4)); // if show is true, it will be h, else l
 	#endif
 }
 
