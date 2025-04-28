@@ -203,9 +203,9 @@ int main(int argc, char*argv[]) {
 	fileTxt = getFileLines(file,&fileLines);
 	int inp;
 	char looped=false;
+	preventCtrlC();
 	while((inp!=CTRLC)&&(ok)){
 		if(looped)printf("\x1b[%dA\x1b[1000D", size[1]);
-		preventCtrlC();
 		getTermSize();
 		char*spaces=repeat("\x20",size[0]-strlen(file));
 		printf("\x1b[7m");
@@ -215,9 +215,16 @@ int main(int argc, char*argv[]) {
 		printTxt();
 		// run=false;
 		free(spaces);
-		unpreventCtrlC();
+		#ifndef _WIN32
+			preventCtrlC();
+		#else
+			unpreventCtrlC();
+		#end
 		inp=zeroEchoGetchar();
 		looped=true;
+		#ifdef _WIN32
+			preventCtrlC();
+		#else
 	}
 	if(ok)theHandlerWeUseForCtrlC_InLinuxAndTheBasicExitCommandInWindows();
 	return!(ok);
