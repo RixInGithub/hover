@@ -22,7 +22,7 @@ int size[2]={0,0};
 #include <conio.h>
 #include <windows.h>
 
-BOOL WINAPI windows__exitHandle(DWORD a) {
+BOOL WINAPI windows__exitHandle(DWORD a) { // this function gets called when ctrl+pausebreak is pressed
 	return(TRUE); // the functions honest reaction to that information: idgaf
 }
 #else
@@ -32,15 +32,15 @@ BOOL WINAPI windows__exitHandle(DWORD a) {
 #include <signal.h>
 
 struct termios oldt, newt;
-
-void unix__exitHandle() {
-	printf("Goodbye.\n");
-	curVis(true);
-}
 #endif
 // non-windows requirements
 
 // cross-compatability
+void theHandlerWeUseForCtrlC_InLinuxAndTheBasicExitCommandInWindows() { // selfexplanatory!
+	printf("Goodbye.\n");
+	curVis(true);
+}
+
 void getTermSize() {
 	#ifdef _WIN32
 		HANDLE hConsole=CreateFile("CONOUT$",-1073741824,3,0,3,0,0);
@@ -61,9 +61,9 @@ void getTermSize() {
 
 void preventCtrlC() {
 	#ifdef _WIN32
-		SetConsoleCtrlHandler(windows__idek1,TRUE);
+		SetConsoleCtrlHandler(windows__exitHandle,true);
 	#else
-		signal(2,unix__exitHandle);
+		signal(2,theHandlerWeUseForCtrlC_InLinuxAndTheBasicExitCommandInWindows);
 		signal(3,SIG_IGN);
 	#endif
 }
@@ -219,6 +219,7 @@ int main(int argc, char*argv[]) {
 		inp=zeroEchoGetchar();
 		looped=true;
 	}
+	if(ok)theHandlerWeUseForCtrlC_InLinuxAndTheBasicExitCommandInWindows()
 	return!(ok);
 }
 // main functionality
