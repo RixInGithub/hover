@@ -219,12 +219,12 @@ int main(int argc, char*argv[]) {
 			preventCtrlC();
 		#else
 			unpreventCtrlC();
-		#end
+		#endif
 		inp=zeroEchoGetchar();
 		looped=true;
 		#ifdef _WIN32
 			preventCtrlC();
-		#else
+		#endif
 	}
 	if(ok)theHandlerWeUseForCtrlC_InLinuxAndTheBasicExitCommandInWindows();
 	return!(ok);
