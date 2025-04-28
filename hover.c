@@ -103,7 +103,7 @@ char zeroEchoGetchar() {
 	#else
 		struct termios _newt;
 		tcgetattr(0,&oldt);
-		_newt = _oldt;
+		_newt = oldt;
 		_newt.c_lflag &= ~ECHO;
 		tcsetattr(0,TCSANOW,&_newt);
 		res = getchar();
