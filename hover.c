@@ -58,10 +58,6 @@ void preventCtrlC() {
 	#ifdef _WIN32
 		SetConsoleCtrlHandler(windows__idek1,TRUE);
 	#else
-		tcgetattr(0,&oldt);
-		newt=oldt;
-		newt.c_lflag&=-393;
-		tcsetattr(0,0,&newt);
 		signal(2,SIG_IGN);
 	#endif
 }
@@ -70,7 +66,7 @@ void unpreventCtrlC() {
 	#ifdef _WIN32
 		SetConsoleCtrlHandler(0,false);
 	#else
-		signal(2, SIG_IGN);
+		signal(2,SIG_DFL);
 	#endif
 }
 
