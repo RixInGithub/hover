@@ -1,5 +1,5 @@
 #include <stdio.h>
 
 int main() {
-	printf("%d", stdout);
+	printf("sigint=%d, sig_ign=%d", SIGINT, SIG_IGN);
 }

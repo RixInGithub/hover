@@ -1,11 +1,11 @@
 # windows
-# *.exe
-# */*.exe
+*.exe
+*/*.exe
 # !/hover.exe
 
 # linux/unix
-# *.
-# */*.
+*.
+*/*.
 # !/hover
 
 # we will allow hover binaries/executables when there will be huge demand
