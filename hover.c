@@ -202,7 +202,7 @@ int main(int argc, char*argv[]) {
 		getTermSize();
 		char*spaces=repeat("\x20",size[0]-strlen(file));
 		printf("\x1b[7m");
-		printf(file);
+		printf("%s",file);
 		printf("%s",spaces);
 		printf("\x1b[0m\n");
 		printTxt();
