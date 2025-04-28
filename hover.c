@@ -54,6 +54,10 @@ void getTermSize() {
 	#endif
 }
 
+#ifndef _WIN32
+void theHandlerWeUseForCtrlC_InLinuxAndTheBasicExitCommandInWindows(); // this is so gcc doesnt scream at us for defining it later on
+#endif
+
 void preventCtrlC() {
 	#ifdef _WIN32
 		SetConsoleCtrlHandler(windows__exitHandle,true);
