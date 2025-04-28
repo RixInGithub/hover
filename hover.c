@@ -70,7 +70,7 @@ void unpreventCtrlC() {
 	#ifdef _WIN32
 		SetConsoleCtrlHandler(0,false);
 	#else
-		signal(SIGINT, SIG_IGN);
+		signal(2, SIG_IGN);
 	#endif
 }
 
