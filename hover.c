@@ -54,9 +54,23 @@ void getTermSize() {
 	#endif
 }
 
-#ifndef _WIN32
-void theHandlerWeUseForCtrlC_InLinuxAndTheBasicExitCommandInWindows(); // this is so gcc doesnt scream at us for defining it later on
-#endif
+void curVis(bool show) {
+	#ifdef _WIN32
+		HANDLE hConsole=CreateFile("CONOUT$",-1073741824,3,0,3,0,0);
+		CONSOLE_CURSOR_INFO curInf;
+		if(hConsole==INVALID_HANDLE_VALUE)return;
+		GetConsoleCursorInfo(hConsole, &curInf);
+		curInf.bVisible = show;
+		SetConsoleCursorInfo(hConsole, &curInf);
+	#else
+		printf("\x1b[?25%c",104+(show*4)); // if show is false, it will be h, else l
+	#endif
+}
+
+void theHandlerWeUseForCtrlC_InLinuxAndTheBasicExitCommandInWindows() { // selfexplanatory!
+	printf("\n\Thank you for using hover, until next time!\n");
+	curVis(true);
+}
 
 void preventCtrlC() {
 	#ifdef _WIN32
@@ -91,24 +105,6 @@ char zeroEchoGetchar() {
 		tcsetattr(0,TCSANOW,&_oldt);
 		return res;
 	#endif
-}
-
-void curVis(bool show) {
-	#ifdef _WIN32
-		HANDLE hConsole=CreateFile("CONOUT$",-1073741824,3,0,3,0,0);
-		CONSOLE_CURSOR_INFO curInf;
-		if(hConsole==INVALID_HANDLE_VALUE)return;
-		GetConsoleCursorInfo(hConsole, &curInf);
-		curInf.bVisible = show;
-		SetConsoleCursorInfo(hConsole, &curInf);
-	#else
-		printf("\x1b[?25%c",104+(show*4)); // if show is false, it will be h, else l
-	#endif
-}
-
-void theHandlerWeUseForCtrlC_InLinuxAndTheBasicExitCommandInWindows() { // selfexplanatory!
-	printf("Goodbye.\n");
-	curVis(true);
 }
 // cross-compatability
 
