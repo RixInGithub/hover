@@ -68,7 +68,7 @@ void curVis(bool show) {
 }
 
 void theHandlerWeUseForCtrlC_InLinuxAndTheBasicExitCommandInWindows() { // selfexplanatory!
-	printf("\n\Thank you for using hover, until next time!\n");
+	printf("\n\nThank you for using hover, until next time!\n");
 	curVis(true);
 }
 
