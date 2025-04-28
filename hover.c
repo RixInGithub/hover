@@ -72,7 +72,7 @@ void theHandlerWeUseForCtrlC_InLinuxAndTheBasicExitCommandInWindows() { // selfe
 	printf("\n\nThank you for using hover, until next time!\n");
 	curVis(true);
 	#ifndef _WIN32
-		tcsetattr(0,TCSANOW,&_oldt); // make sure we are back to normal
+		tcsetattr(0,TCSANOW,&oldt); // make sure we are back to normal
 	#endif
 	exit(!ok);
 }
@@ -101,13 +101,13 @@ char zeroEchoGetchar() {
 		res=_getch();
 		return res;
 	#else
-		struct termios _oldt, _newt;
-		tcgetattr(0,&_oldt);
+		struct termios _newt;
+		tcgetattr(0,&oldt);
 		_newt = _oldt;
 		_newt.c_lflag &= ~ECHO;
 		tcsetattr(0,TCSANOW,&_newt);
 		res = getchar();
-		tcsetattr(0,TCSANOW,&_oldt);
+		tcsetattr(0,TCSANOW,&oldt);
 		return res;
 	#endif
 }
