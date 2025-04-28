@@ -76,8 +76,8 @@ void preventCtrlC() {
 	#ifdef _WIN32
 		SetConsoleCtrlHandler(windows__exitHandle,true);
 	#else
-		signal(2,theHandlerWeUseForCtrlC_InLinuxAndTheBasicExitCommandInWindows);
-		signal(3,SIG_IGN);
+		signal(SIGINT,theHandlerWeUseForCtrlC_InLinuxAndTheBasicExitCommandInWindows);
+		signal(SIGQUIT,SIG_IGN);
 	#endif
 }
 
@@ -85,8 +85,8 @@ void unpreventCtrlC() {
 	#ifdef _WIN32
 		SetConsoleCtrlHandler(0,false);
 	#else
-		signal(2,SIG_DFL);
-		signal(3,SIG_DFL);
+		signal(SIGINT,SIG_DFL);
+		signal(SIGQUIT,SIG_DFL);
 	#endif
 }
 
