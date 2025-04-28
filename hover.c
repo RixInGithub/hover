@@ -22,7 +22,7 @@ int size[2]={0,0};
 #include <conio.h>
 #include <windows.h>
 
-BOOL WINAPI windows__idek1(DWORD a) {
+BOOL WINAPI windows__exitHandle(DWORD a) {
 	return(TRUE); // the functions honest reaction to that information: idgaf
 }
 #else
@@ -32,6 +32,11 @@ BOOL WINAPI windows__idek1(DWORD a) {
 #include <signal.h>
 
 struct termios oldt, newt;
+
+void unix__exitHandle() {
+	printf("Goodbye.\n");
+	curVis(true);
+}
 #endif
 // non-windows requirements
 
@@ -58,7 +63,8 @@ void preventCtrlC() {
 	#ifdef _WIN32
 		SetConsoleCtrlHandler(windows__idek1,TRUE);
 	#else
-		signal(2,SIG_IGN);
+		signal(2,unix__exitHandle);
+		signal(3,SIG_IGN);
 	#endif
 }
 
@@ -67,6 +73,7 @@ void unpreventCtrlC() {
 		SetConsoleCtrlHandler(0,false);
 	#else
 		signal(2,SIG_DFL);
+		signal(3,SIG_DFL);
 	#endif
 }
 
@@ -212,8 +219,6 @@ int main(int argc, char*argv[]) {
 		inp=zeroEchoGetchar();
 		looped=true;
 	}
-	printf("Goodbye.\n");
-	curVis(true);
 	return!(ok);
 }
 // main functionality
