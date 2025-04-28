@@ -182,7 +182,7 @@ void printTxt() {
 	int count=0;
 	while(count<(size[1]-1)){
 		if(count<fileLines)printf("%s",fileTxt[count]); // otherwise just print blank line
-		if(count+1<(size[1]-1))printf(" \n",count);
+		if(count+1<(size[1]-1))printf("\n");
 		count++;
 	}
 	fflush(stdout);
@@ -194,7 +194,7 @@ int main(int argc, char*argv[]) {
 	bool ok = true;
 	file = getFileName(argc,argv);
 	fileTxt = getFileLines(file,&fileLines);
-	char inp;
+	int inp;
 	char looped=false;
 	while((inp!=CTRLC)&&(ok)){
 		if(looped)printf("\x1b[%dA\x1b[1000D", size[1]);

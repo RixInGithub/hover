@@ -2,5 +2,5 @@
 #include <signal.h>
 
 int main() {
-	printf("sigint=%d", SIGINT);
+	printf("sigquit=%d", SIGQUIT);
 }
