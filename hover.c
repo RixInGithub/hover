@@ -71,7 +71,10 @@ void curVis(bool show) {
 void theHandlerWeUseForCtrlC_InLinuxAndTheBasicExitCommandInWindows() { // selfexplanatory!
 	printf("\n\nThank you for using hover, until next time!\n");
 	curVis(true);
-	exit(0);
+	#ifndef _WIN32
+		tcsetattr(0,TCSANOW,&_oldt); // make sure we are back to normal
+	#endif
+	exit(!ok);
 }
 
 void preventCtrlC() {
