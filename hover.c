@@ -36,11 +36,6 @@ struct termios oldt, newt;
 // non-windows requirements
 
 // cross-compatability
-void theHandlerWeUseForCtrlC_InLinuxAndTheBasicExitCommandInWindows() { // selfexplanatory!
-	printf("Goodbye.\n");
-	curVis(true);
-}
-
 void getTermSize() {
 	#ifdef _WIN32
 		HANDLE hConsole=CreateFile("CONOUT$",-1073741824,3,0,3,0,0);
@@ -105,6 +100,11 @@ void curVis(bool show) {
 	#else
 		printf("\x1b[?25%c",104+(show*4)); // if show is false, it will be h, else l
 	#endif
+}
+
+void theHandlerWeUseForCtrlC_InLinuxAndTheBasicExitCommandInWindows() { // selfexplanatory!
+	printf("Goodbye.\n");
+	curVis(true);
 }
 // cross-compatability
 
@@ -219,7 +219,7 @@ int main(int argc, char*argv[]) {
 		inp=zeroEchoGetchar();
 		looped=true;
 	}
-	if(ok)theHandlerWeUseForCtrlC_InLinuxAndTheBasicExitCommandInWindows()
+	if(ok)theHandlerWeUseForCtrlC_InLinuxAndTheBasicExitCommandInWindows();
 	return!(ok);
 }
 // main functionality
