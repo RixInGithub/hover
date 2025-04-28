@@ -228,6 +228,6 @@ int main(int argc, char*argv[]) {
 		#endif
 	}
 	if(ok)theHandlerWeUseForCtrlC_InLinuxAndTheBasicExitCommandInWindows();
-	return!1;
+	return!0;
 }
 // main functionality
