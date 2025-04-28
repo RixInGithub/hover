@@ -17,6 +17,7 @@ char*file;
 char**fileTxt={};
 int fileLines=0;
 int size[2]={0,0};
+bool ok = true;
 // globals
 #ifdef _WIN32
 #include <conio.h>
@@ -70,6 +71,7 @@ void curVis(bool show) {
 void theHandlerWeUseForCtrlC_InLinuxAndTheBasicExitCommandInWindows() { // selfexplanatory!
 	printf("\n\nThank you for using hover, until next time!\n");
 	curVis(true);
+	exit(0);
 }
 
 void preventCtrlC() {
@@ -198,7 +200,6 @@ void printTxt() {
 int main(int argc, char*argv[]) {
 	curVis(false);
 	bool run = true;
-	bool ok = true;
 	file = getFileName(argc,argv);
 	fileTxt = getFileLines(file,&fileLines);
 	int inp;
@@ -227,6 +228,6 @@ int main(int argc, char*argv[]) {
 		#endif
 	}
 	if(ok)theHandlerWeUseForCtrlC_InLinuxAndTheBasicExitCommandInWindows();
-	return!(ok);
+	return!1;
 }
 // main functionality
