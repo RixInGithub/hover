@@ -194,7 +194,7 @@ int main(int argc, char*argv[]) {
 	bool ok = true;
 	file = getFileName(argc,argv);
 	fileTxt = getFileLines(file,&fileLines);
-	char inp=0;
+	char inp;
 	char looped=false;
 	while((inp!=CTRLC)&&(ok)){
 		if(looped)printf("\x1b[%dA\x1b[1000D", size[1]);
