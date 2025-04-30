@@ -1,9 +1,9 @@
-/***********************************************
-	hover -- Heavily OVerexaggerated Editor (Really!)
-	A terminal-based code editor.
-	2024-present, RixTheTyrunt + contributors.
-	Licensed under the MIT License.
-***********************************************/
+/*****************************************************
+ * hover -- Heavily OVerexaggerated Editor (Really!) *
+ * A terminal-based code editor.                     *
+ * 2024-present, RixTheTyrunt + contributors.        *
+ * Licensed under the MIT License.                   *
+ *****************************************************/
 
 #include "keys.h"
 
